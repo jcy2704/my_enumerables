@@ -4,7 +4,7 @@ module Enumerable
     yield(element)
     end
   end
-
+  
   def my_each_with_index
     i = 0
     for element in self
@@ -13,4 +13,11 @@ module Enumerable
     end
   end
 
+  def my_select
+    my_each.call
+  end
+
 end
+
+
+
