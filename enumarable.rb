@@ -101,4 +101,12 @@ module Enumerable
       return arr
     end
 
+    def my_inject(*arg) #take an array or a range of numbers and can receive a block, we need two value, one for accumalator
+      acc = 0
+      if self.is_a?(Range)
+        my_each { |element, value| return yield(element, value)}
+      end 
+    end
+
+
 end
