@@ -33,4 +33,21 @@ module Enumerable
     arr
   end
 
+  def my_all?(arg)
+    if block_given?
+      my_each { |element| return false if yield(element) == false}
+      # iterate each element in the array and see if it matches with yield(element) conditions
+      # e.g. [[1,2],2,'helo'].all? { |n| n.is_a?(Array) }
+      # the first element is an Array so it returns true, but the second element (2) is a numeric values, so returns false.
+      return true
+      # returns true if everything matches
+    elsif !arg.nil? and arg.is_a?(Class)
+      my_each { |element| return false if element.class != arg}
+      # if argument is a class then checks if each elements matches with the class
+    elsif arg.nil?
+      return false
+    else
+      return true
+    end
+  end
 end
