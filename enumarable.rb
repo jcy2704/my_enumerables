@@ -79,4 +79,18 @@ module Enumerable
         return false
       end
     end
+
+    def my_count(arg = nil)
+        counter = 0
+        if arg.nil? and !block_given? 
+          return self.length
+        elsif !arg.nil? and arg.is_a?(Integer)
+          my_each {|element| counter += 1 if element == arg}
+          return counter
+        elsif block_given?
+          my_each {|element| counter += 1 if yield(element) }
+          return counter
+        end
+    end
+
 end
