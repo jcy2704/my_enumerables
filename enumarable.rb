@@ -101,11 +101,25 @@ module Enumerable
       return arr
     end
 
-    def my_inject(*arg) #take an array or a range of numbers and can receive a block, we need two value, one for accumalator
-      acc = 0
-      if self.is_a?(Range)
-        my_each { |element, value| return yield(element, value)}
-      end 
+    def my_inject(arg = nil, sym = nil) #take an array or a range of numbers and can receive a block, we need two value, one for accumalator
+      if block_given?
+        acc = arg
+        my_each { |element| acc = acc.nil? ? element : yield(acc, element)}
+        acc
+      elsif arg.is_a?(Symbol)
+        acc = nil
+        my_each { |element| acc = acc.nil? ? element : acc.send(arg, element)}
+        acc
+      elsif arg.is_a?(Integer) and sym.nil?
+        arg.times do
+          my_each { |element| acc = acc.nil? ? element : yield(acc, element)}
+        end
+        acc
+      elsif arg.is_a?(Integer) and sym.is_a?(Symbol)
+        acc = arg
+          my_each { |element| acc = acc.nil? ? element : acc.send(sym, element)}
+        acc
+      end
     end
 
 
