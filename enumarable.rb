@@ -1,4 +1,9 @@
-# rubocop: disable /Style/CaseEquality
+# rubocop:disable Style/CaseEquality
+# rubocop:disable Metrics/ModuleLength
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/PerceivedComplexity
+# rubocop:disable Style/For
+# rubocop:disable Style/RedundantSelf
 
 module Enumerable
   def my_each
@@ -24,7 +29,6 @@ module Enumerable
 
     arr = []
     my_each { |element| arr.push(element) if yield(element) }
-
     arr
   end
 
@@ -32,9 +36,8 @@ module Enumerable
     if block_given?
       my_each { |element| return false if yield(element) == false }
       true
-
     elsif !arg.nil? and arg.is_a?(Class)
-      my_each { |element| return false if element.class != arg}
+      my_each { |element| return false if element.class != arg }
     elsif arg.nil?
       false
     else
@@ -74,7 +77,7 @@ module Enumerable
   def my_count(arg = nil)
     counter = 0
     if arg.nil? && !block_given?
-      my_each { |element| counter += 1 }
+      my_each { counter += 1 }
       counter
     elsif !arg.nil? && arg.is_a?(Integer)
       my_each { |element| counter += 1 if element == arg }
@@ -117,7 +120,6 @@ module Enumerable
       acc
     end
   end
-
 
   def multiply_els(array)
     array.my_inject(:*)
