@@ -1,7 +1,9 @@
+# rubocop: disable /Style/CaseEquality
+
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
-    
+
     for element in self
     yield(element)
     end
@@ -29,14 +31,14 @@ module Enumerable
   def my_all?(arg)
     if block_given?
       my_each { |element| return false if yield(element) == false}
-      return true
+      true
 
     elsif !arg.nil? and arg.is_a?(Class)
       my_each { |element| return false if element.class != arg}
     elsif arg.nil?
-      return false
+      false
     else
-      return true
+      true
     end
   end
 
@@ -48,37 +50,37 @@ module Enumerable
     elsif arg.nil?
       my_each { |element| return true if element.nil?}
     else
-      return false
+      false
     end
   end
 
     def my_none?(arg = nil)
       if arg.is_a?(Class)
         my_each { |element| return false if element.class == arg}
-        return true
+        true
       elsif block_given?
         my_each { |element| return false if yield(element)}
-        return true
+        true
       elsif self.length == 0 or self.nil?
-        return true
+        true
       elsif !block_given? and arg.nil?
         my_any? { |element| return false if element == true}
         my_each { |element| return true if element == nil or element == false}
       else
-        return false
+        false
       end
     end
 
     def my_count(arg = nil)
         counter = 0
         if arg.nil? and !block_given?
-          return self.length
+          self.length
         elsif !arg.nil? and arg.is_a?(Integer)
           my_each {|element| counter += 1 if element == arg}
-          return counter
+          counter
         elsif block_given?
           my_each {|element| counter += 1 if yield(element) }
-          return counter
+          counter
         end
     end
 
@@ -91,7 +93,7 @@ module Enumerable
         else
           my_each { |element| arr.push(yield(element)) }
       end
-      return arr
+      arr
     end
 
     def my_inject(arg = nil, sym = nil) #take an array or a range of numbers and can receive a block, we need two value, one for accumalator
