@@ -82,7 +82,7 @@ module Enumerable
 
     def my_count(arg = nil)
         counter = 0
-        if arg.nil? and !block_given? 
+        if arg.nil? and !block_given?
           return self.length
         elsif !arg.nil? and arg.is_a?(Integer)
           my_each {|element| counter += 1 if element == arg}
@@ -91,6 +91,14 @@ module Enumerable
           my_each {|element| counter += 1 if yield(element) }
           return counter
         end
+    end
+
+    def my_map(arg = nil)
+      return to_enum(:my_map) unless block_given?
+
+      arr = []
+      my_each { |element| arr.push(yield(element)) }
+      return arr
     end
 
 end
