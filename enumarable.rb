@@ -125,3 +125,10 @@ module Enumerable
     array.my_inject(:*)
   end
 end
+
+# rubocop:enable Style/CaseEquality
+# rubocop:enable Metrics/ModuleLength
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/PerceivedComplexity
+# rubocop:enable Style/For
+# rubocop:enable Style/RedundantSelf
