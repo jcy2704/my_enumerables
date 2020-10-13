@@ -51,14 +51,32 @@ module Enumerable
     end
   end
 
-  def my_any?(arg)
+  def my_any?(arg = nil)
     if block_given?
       my_each { |element| return true if yield(element)}
     elsif !arg.nil? and arg.is_a?(Class)
-      my_each { |element| return true if element == arg}
+      my_each { |element| return true if element.class == arg}
     elsif arg.nil?
       my_each { |element| return true if element.nil?}
     else
       return false
+    end
+  end
+
+    def my_none?(arg = nil)
+      if arg.is_a?(Class)
+        my_each { |element| return false if element.class == arg}
+        return true
+      elsif block_given?
+        my_each { |element| return false if yield(element)}
+        return true
+      elsif self.length == 0 or self.nil?
+        return true
+      elsif !block_given? and arg.nil?
+        my_any? { |element| return false if element == true}
+        my_each { |element| return true if element == nil or element == false}
+      else
+        return false
+      end
     end
 end
