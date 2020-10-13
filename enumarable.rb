@@ -50,4 +50,15 @@ module Enumerable
       return true
     end
   end
+
+  def my_any?(arg)
+    if block_given?
+      my_each { |element| return true if yield(element)}
+    elsif !arg.nil? and arg.is_a?(Class)
+      my_each { |element| return true if element == arg}
+    elsif arg.nil?
+      my_each { |element| return true if element.nil?}
+    else
+      return false
+    end
 end
