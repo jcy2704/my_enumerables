@@ -9,13 +9,13 @@ module Enumerable
 
     element = self if self.class == Array
     element = to_a if self.class == Range || Hash
-
+    
     i = 0
     while i < element.length
       yield(element[i])
       i += 1
-    end
-    element
+    end   
+    self
   end
 
   def my_each_with_index
@@ -29,7 +29,7 @@ module Enumerable
       yield(element[i], i)
       i += 1
     end
-    element
+    self
   end
 
   def my_select
