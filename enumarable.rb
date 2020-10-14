@@ -112,7 +112,7 @@ module Enumerable
     acc = arg
     my_each { |element| acc = acc.nil? ? element : yield(acc, element) }
     return acc
-    if arg.is_a?(Symbol)
+    if arg.nil? && arg.is_a?(Symbol)
       acc = nil
       my_each { |element| acc = acc.nil? ? element : acc.send(arg, element) }
       acc
