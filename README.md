@@ -20,7 +20,7 @@ We created a our own enumerables methods in Ruby.
 
 ## Live Demo
 
-[Check our code](https://repl.it/repls/UnconsciousMessyTests)
+[Check our code](https://repl.it/@jcy2704/UnripePutridService#main.rb)
 
 ## Getting Started
 
@@ -58,7 +58,7 @@ To run our project type 'ruby enumerable.rb' in your terminal where your file is
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/jcy2704/bubble_sort/issues).
+Feel free to check the [issues page](https://github.com/thneves/my_enumerables/issues).
 
 ## Show your support
 

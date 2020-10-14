@@ -8,8 +8,11 @@ module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
 
-    for element in self
-      yield(element)
+    i = 0
+    element = self
+    while i < length
+      yield(element[i])
+      i += 1
     end
   end
 
@@ -17,8 +20,9 @@ module Enumerable
     return to_enum(:my_each_with_index) unless block_given?
 
     i = 0
-    for element in self
-      yield(element, i)
+    element = self
+    while i < length
+      yield(element[i], i)
       i += 1
     end
   end
@@ -53,11 +57,11 @@ module Enumerable
     elsif !arg.nil? and arg.is_a?(Class)
       my_each { |element| return true if [element.class, element.class.superclass].include?(arg) }
     elsif arg.nil?
-      my_each { |element| return true if element.nil? }
+      my_each { |element| return true if element }
     elsif arg.class == Regexp
       my_each { |element| return true if arg.match(element) }
     else
-      my_each { |element| return true if element == arg }
+      my_each { |element| return false if element == arg }
     end
     false
   end
@@ -109,23 +113,15 @@ module Enumerable
   end
 
   def my_inject(arg = nil, sym = nil)
-    acc = arg
-    my_each { |element| acc = acc.nil? ? element : yield(acc, element) }
-    if arg.is_a?(Symbol)
-      acc = nil
-      my_each { |element| acc = acc.nil? ? element : acc.send(arg, element) }
-      acc
-    elsif arg.is_a?(Integer) && sym.nil?
-      arg.times do
-        my_each { |element| acc = acc.nil? ? element : yield(acc, element) }
-      end
-      acc
-    elsif arg.is_a?(Integer) && sym.is_a?(Symbol)
-      acc = arg
-      my_each { |element| acc = acc.nil? ? element : acc.send(sym, element) }
-      acc
+    if (!arg.nil? && sym.nil?) && (arg.is_a?(Symbol) || arg.is_a?(String))
+      sym = arg
     end
-    acc
+    if !block_given? && !sym.nil?
+      my_each { |element| arg = arg.nil? ? element : arg.send(sym, element) }
+    else
+      my_each { |element| arg = arg.nil? ? element : yield(arg, element) }
+    end
+    arg
   end
 end
 
