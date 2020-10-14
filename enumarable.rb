@@ -7,23 +7,29 @@ module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
 
+    element = self if self.class == Array
+    element = to_a if self.class == Range || Hash
+
     i = 0
-    element = self
-    while i < length
+    while i < element.length
       yield(element[i])
       i += 1
     end
+    element
   end
 
   def my_each_with_index
     return to_enum(:my_each_with_index) unless block_given?
 
+    element = self if self.class == Array
+    element = to_a if self.class == Range || Hash
+
     i = 0
-    element = self
-    while i < length
+    while i < element.length
       yield(element[i], i)
       i += 1
     end
+    element
   end
 
   def my_select
@@ -60,7 +66,7 @@ module Enumerable
     elsif arg.class == Regexp
       my_each { |element| return true if arg.match(element) }
     else
-      my_each { |element| return false if element == arg }
+      my_each { |element| return true if element == arg }
     end
     false
   end
@@ -114,6 +120,7 @@ module Enumerable
   def my_inject(arg = nil, sym = nil)
     if (!arg.nil? && sym.nil?) && (arg.is_a?(Symbol) || arg.is_a?(String))
       sym = arg
+      arg = nil
     end
 
     if !block_given? && !sym.nil?
@@ -133,3 +140,6 @@ end
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
 # rubocop:enable Style/RedundantSelf, Style/IfUnlessModifier
+
+range = [1..3]
+p range.my_each { |num| p num + range.length }
