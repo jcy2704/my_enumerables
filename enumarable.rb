@@ -9,7 +9,7 @@ module Enumerable
 
     element = self if self.class == Array
     element = to_a if self.class == Range || Hash
-  
+
     i = 0
     while i < element.length
       yield(element[i])
