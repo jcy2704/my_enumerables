@@ -31,29 +31,35 @@ module Enumerable
     arr
   end
 
-  def my_all?(arg)
+  def my_all?(arg = nil)
     if block_given?
       my_each { |element| return false if yield(element) == false }
       true
     elsif !arg.nil? and arg.is_a?(Class)
-      my_each { |element| return false if element.class != arg }
+      my_each { |element| return false unless[element.class, element.class.superclass].include?(arg) }
     elsif arg.nil?
-      false
+      my_each { |element| return false if element.nil? || element == false }
+    elsif arg.class == Regexp
+      my_each { |element| return false if !arg.match(element)}
     else
-      true
+      my_each { |element| return false if element != arg}
     end
+    true
   end
 
   def my_any?(arg = nil)
     if block_given?
       my_each { |element| return true if yield(element) }
     elsif !arg.nil? and arg.is_a?(Class)
-      my_each { |element| return true if element.class == arg }
+      my_each { |element| return true if [element.class, element.class.superclass].include?(arg) }
     elsif arg.nil?
       my_each { |element| return true if element.nil? }
+    elsif arg.class == Regexp
+      my_each { |element| return true if arg.match(element)}
     else
-      false
+      my_each { |element| return true if element == arg }
     end
+    false
   end
 
   def my_none?(arg = nil)
@@ -68,9 +74,12 @@ module Enumerable
     elsif !block_given? && arg.nil?
       my_any? { |element| return false if element == true }
       my_each { |element| return true if element.nil? || element == false }
+    elsif arg.class == Regexp
+      my_each { |element| return false if arg.match(element)}
     else
-      false
+      my_each { |element| return false if element == arg}
     end
+    true
   end
 
   def my_count(arg = nil)
@@ -100,11 +109,10 @@ module Enumerable
   end
 
   def my_inject(arg = nil, sym = nil)
-    if block_given?
       acc = arg
       my_each { |element| acc = acc.nil? ? element : yield(acc, element) }
       acc
-    elsif arg.is_a?(Symbol)
+    if arg.is_a?(Symbol)
       acc = nil
       my_each { |element| acc = acc.nil? ? element : acc.send(arg, element) }
       acc
@@ -119,10 +127,10 @@ module Enumerable
       acc
     end
   end
+end
 
-  def multiply_els(array)
-    array.my_inject(:*)
-  end
+def multiply_els(array)
+  array.my_inject(:*)
 end
 
 # rubocop:enable Metrics/ModuleLength

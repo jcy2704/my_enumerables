@@ -2,7 +2,7 @@
 
 # ENUMERABLES
 
-We created a our own enumerables methods in Ruby. 
+We created a our own enumerables methods in Ruby.
 - my_each
 - my_each_with_index
 - my_select
@@ -20,7 +20,7 @@ We created a our own enumerables methods in Ruby.
 
 ## Live Demo
 
-[Check our code](https://repl.it/repls/OrchidIllProgrammer#main.rb)
+[Check our code](https://repl.it/repls/UnconsciousMessyTests)
 
 ## Getting Started
 
