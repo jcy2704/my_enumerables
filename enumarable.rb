@@ -1,7 +1,6 @@
 # rubocop:disable Metrics/ModuleLength
 # rubocop:disable Metrics/CyclomaticComplexity
 # rubocop:disable Metrics/PerceivedComplexity
-# rubocop:disable Style/For
 # rubocop:disable Style/RedundantSelf
 
 module Enumerable
@@ -113,7 +112,7 @@ module Enumerable
   end
 
   def my_inject(arg = nil, sym = nil)
-    if (!arg.nil? && sym.nil?) && (arg.is_a?(Symbol) || arg.is_a?(String))
+    if (!arg.nil? && sym.nil?) && ((arg.is_a?(Symbol) || arg.is_a?(String))
       sym = arg
     end
     if !block_given? && !sym.nil?
