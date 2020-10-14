@@ -55,7 +55,7 @@ module Enumerable
     elsif arg.nil?
       my_each { |element| return true if element.nil? }
     elsif arg.class == Regexp
-      my_each { |element| return true if arg.match(element)}
+      my_each { |element| return true if arg.match(element) }
     else
       my_each { |element| return true if element == arg }
     end
@@ -111,7 +111,7 @@ module Enumerable
   def my_inject(arg = nil, sym = nil)
     acc = arg
     my_each { |element| acc = acc.nil? ? element : yield(acc, element) }
-    acc
+    return acc
     if arg.is_a?(Symbol)
       acc = nil
       my_each { |element| acc = acc.nil? ? element : acc.send(arg, element) }
