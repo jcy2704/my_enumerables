@@ -1,8 +1,3 @@
-# rubocop:disable Metrics/ModuleLength
-# rubocop:disable Metrics/CyclomaticComplexity
-# rubocop:disable Metrics/PerceivedComplexity
-# rubocop:disable Style/RedundantSelf
-
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
@@ -112,9 +107,10 @@ module Enumerable
   end
 
   def my_inject(arg = nil, sym = nil)
-    if (!arg.nil? && sym.nil?) && ((arg.is_a?(Symbol) || arg.is_a?(String))
+    if (!arg.nil? && sym.nil?) && (arg.is_a?(Symbol) || arg.is_a?(String))
       sym = arg
     end
+
     if !block_given? && !sym.nil?
       my_each { |element| arg = arg.nil? ? element : arg.send(sym, element) }
     else
@@ -127,9 +123,3 @@ end
 def multiply_els(array)
   array.my_inject(:*)
 end
-
-# rubocop:enable Metrics/ModuleLength
-# rubocop:enable Metrics/CyclomaticComplexity
-# rubocop:enable Metrics/PerceivedComplexity
-# rubocop:enable Style/For
-# rubocop:enable Style/RedundantSelf
