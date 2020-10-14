@@ -1,7 +1,7 @@
 # rubocop:disable Metrics/ModuleLength
 # rubocop:disable Metrics/CyclomaticComplexity
 # rubocop:disable Metrics/PerceivedComplexity
-# rubocop:disable Style/RedundantSelf, Style/IfUnlessModifier
+# rubocop:disable Style/RedundantSelf
 
 module Enumerable
   def my_each
@@ -139,7 +139,4 @@ end
 # rubocop:enable Metrics/ModuleLength
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
-# rubocop:enable Style/RedundantSelf, Style/IfUnlessModifier
-
-range = [1..3]
-p range.my_each { |num| p num + range.length }
+# rubocop:enable Style/RedundantSelf
