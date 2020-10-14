@@ -36,13 +36,13 @@ module Enumerable
       my_each { |element| return false if yield(element) == false }
       true
     elsif !arg.nil? and arg.is_a?(Class)
-      my_each { |element| return false unless[element.class, element.class.superclass].include?(arg) }
+      my_each { |element| return false unless [element.class, element.class.superclass].include?(arg) }
     elsif arg.nil?
       my_each { |element| return false if element.nil? || element == false }
     elsif arg.class == Regexp
-      my_each { |element| return false if !arg.match(element)}
+      my_each { |element| return false unless arg.match(element) }
     else
-      my_each { |element| return false if element != arg}
+      my_each { |element| return false if element != arg }
     end
     true
   end
@@ -75,9 +75,9 @@ module Enumerable
       my_any? { |element| return false if element == true }
       my_each { |element| return true if element.nil? || element == false }
     elsif arg.class == Regexp
-      my_each { |element| return false if arg.match(element)}
+      my_each { |element| return false if arg.match(element) }
     else
-      my_each { |element| return false if element == arg}
+      my_each { |element| return false if element == arg }
     end
     true
   end
@@ -109,9 +109,9 @@ module Enumerable
   end
 
   def my_inject(arg = nil, sym = nil)
-      acc = arg
-      my_each { |element| acc = acc.nil? ? element : yield(acc, element) }
-      acc
+    acc = arg
+    my_each { |element| acc = acc.nil? ? element : yield(acc, element) }
+    acc
     if arg.is_a?(Symbol)
       acc = nil
       my_each { |element| acc = acc.nil? ? element : acc.send(arg, element) }
