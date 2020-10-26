@@ -60,4 +60,22 @@ describe 'Enumerable' do
       expect(hash.my_select { |n| n == 'a' }).to eq(hash.select { |n| n == 'a' })
     end
   end
+
+  describe '#my_all?' do
+    it 'return enum if no block given' do
+      expect(arr.my_all? { |n| n == Integer }).to eq(arr.all? { |n| n == Integer })
+    end
+    it 'return enum if no block given' do
+      expect(arr.my_all?(Numeric)).to eq(arr.all?(Numeric))
+    end
+    it 'return enum if no block given' do
+      expect(arr.my_all?).to eq(arr.all?)
+    end
+    it 'return enum if no block given' do
+      expect(%w[ant bear cat].my_all?(/t/)).to eq(%w[ant bear cat].all?(/t/))
+    end
+    it 'return enum if no block given' do
+      expect([].my_all?).to eq([].all?)
+    end
+  end
 end
