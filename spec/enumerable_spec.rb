@@ -108,6 +108,32 @@ describe 'Enumerable' do
       expect([].my_any?).to eq([].any?)
     end
   end
+
+  describe '#my_none?' do
+    it 'checks if at least one is false' do
+      expect(str.my_none? { |n| n.length == 5 }).to eq(str.none? { |word| word.length == 5 })
+    end
+
+    it 'checks if none matches the regexp' do
+      expect(str.my_none?(/d/)).to eq(str.none?(/d/))
+    end
+
+    it 'checks if one matches argument' do
+      expect([1, 3.14, 42].my_none?(Float)).to eq([1, 3.14, 42].none?(Float))
+    end
+
+    it 'checks if empty' do
+      expect([].my_none?).to eq([].none?)
+    end
+
+    it 'checks if nil' do
+      expect([nil].my_none?).to eq([nil].none?)
+    end
+
+    it 'return false if one true' do
+      expect([false,nil,true].my_none?).to eq([false,nil,true].none?)
+    end
+  end
 end
 
 # rubocop:enable Metrics/BlockLength
