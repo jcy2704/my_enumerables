@@ -1,9 +1,13 @@
+# rubocop:disable Metrics/BlockLength
+
 require '../enumarable.rb'
 
 describe 'Enumerable' do
   arr = [1, 2, 3, 4]
+  str = %w[ant bear cat]
   hash = { 'a' => 1, 'b' => 2, 'c' => 3 }
   range = (1..4)
+
   describe '#my_each' do
     it 'return enum if no block given' do
       expect(arr.my_each).to be_an Enumerator
@@ -62,20 +66,48 @@ describe 'Enumerable' do
   end
 
   describe '#my_all?' do
-    it 'return enum if no block given' do
+    it 'check if every class true' do
       expect(arr.my_all? { |n| n == Integer }).to eq(arr.all? { |n| n == Integer })
     end
-    it 'return enum if no block given' do
+
+    it 'check if every element match arg' do
       expect(arr.my_all?(Numeric)).to eq(arr.all?(Numeric))
     end
-    it 'return enum if no block given' do
+
+    it 'check if everthing is true with no arg' do
       expect(arr.my_all?).to eq(arr.all?)
     end
-    it 'return enum if no block given' do
-      expect(%w[ant bear cat].my_all?(/t/)).to eq(%w[ant bear cat].all?(/t/))
+
+    it 'check if matches regexp' do
+      expect(str.my_all?(/t/)).to eq(str.all?(/t/))
     end
-    it 'return enum if no block given' do
+
+    it 'check if empty' do
       expect([].my_all?).to eq([].all?)
     end
   end
+
+  describe '#my_any?' do
+    it 'checks if at least one is true' do
+      expect(str.my_any? { |n| n.length >= 3 }).to eq(str.any? { |word| word.length >= 3 })
+    end
+
+    it 'checks if one matches the regexp' do
+      expect(str.my_any?(/d/)).to eq(str.any?(/d/))
+    end
+
+    it 'checks if one matches argument' do
+      expect([nil, true, 99].my_any?(Integer)).to eq([nil, true, 99].any?(Integer))
+    end
+
+    it 'checks if one is true' do
+      expect([nil, true, 99].my_any?).to eq([nil, true, 99].any?)
+    end
+
+    it 'checks if there is something' do
+      expect([].my_any?).to eq([].any?)
+    end
+  end
 end
+
+# rubocop:enable Metrics/BlockLength
