@@ -149,6 +149,13 @@ describe 'Enumerable' do
       expect(arr.my_count { |x| x%2 == 0 }).to eq(arr.count { |x| x%2 == 0 })
     end
   end
+
+  describe '#my_map' do
+    it 'returns new array with changed values' do
+      expect(range.my_map { |i| i * i }).to eq(range.map { |i| i * i })
+      expect(range.my_map { 'cat' }).to eq(range.map { 'cat' })
+    end
+  end
 end
 
 # rubocop:enable Metrics/BlockLength
