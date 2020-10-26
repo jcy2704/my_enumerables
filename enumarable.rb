@@ -2,7 +2,10 @@
 # rubocop:disable Metrics/CyclomaticComplexity
 # rubocop:disable Metrics/PerceivedComplexity
 # rubocop:disable Style/RedundantSelf
+# rubocop:disable Metrics/MethodLength
+# rubocop:disable Metrics/AbcSize
 
+# module Enumerable
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
@@ -35,9 +38,15 @@ module Enumerable
   def my_select
     return to_enum(:my_select) unless block_given?
 
-    arr = []
-    my_each { |element| arr.push(element) if yield(element) }
-    arr
+    if self.class == Array || self.class == Range
+      arr = []
+      my_each { |element| arr.push(element) if yield(element) }
+      arr
+    elsif self.class == Hash
+      hash = {}
+      my_each { |element, value| hash[element] = value if yield(element) }
+      hash
+    end
   end
 
   def my_all?(arg = nil)
@@ -140,3 +149,5 @@ end
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
 # rubocop:enable Style/RedundantSelf
+# rubocop:enable Metrics/MethodLength
+# rubocop:enable Metrics/AbcSize
