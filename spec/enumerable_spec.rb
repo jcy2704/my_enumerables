@@ -1,4 +1,5 @@
 # rubocop:disable Metrics/BlockLength
+# rubocop:disable Style/EvenOdd
 
 require '../enumarable.rb'
 
@@ -134,6 +135,21 @@ describe 'Enumerable' do
       expect([false,nil,true].my_none?).to eq([false,nil,true].none?)
     end
   end
+
+  describe '#my_count' do
+    it 'count elements in array' do
+      expect(arr.my_count).to eq(arr.count)
+    end
+
+    it 'count arg times' do
+      expect(arr.my_count(2)).to eq(arr.count(2))
+    end
+
+    it 'count by block given' do
+      expect(arr.my_count { |x| x%2 == 0 }).to eq(arr.count { |x| x%2 == 0 })
+    end
+  end
 end
 
 # rubocop:enable Metrics/BlockLength
+# rubocop:enable Style/EvenOdd
