@@ -3,6 +3,7 @@
 # rubocop:disable Metrics/PerceivedComplexity
 # rubocop:disable Style/RedundantSelf
 
+# module Enumerable
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
@@ -35,16 +36,22 @@ module Enumerable
   def my_select
     return to_enum(:my_select) unless block_given?
 
-    arr = []
-    my_each { |element| arr.push(element) if yield(element) }
-    arr
+    if self.class == Array || self.class == Range
+      arr = []
+      my_each { |element| arr.push(element) if yield(element) }
+      arr
+    elsif self.class == Hash
+      hash = {}
+      my_each { |element, value| hash[element] = value if yield(element) }
+      hash
+    end
   end
 
   def my_all?(arg = nil)
     if block_given?
       my_each { |element| return false if yield(element) == false }
       true
-    elsif !arg.nil? and arg.is_a?(Class)
+    elsif !arg.nil? && arg.is_a?(Class)
       my_each { |element| return false unless [element.class, element.class.superclass].include?(arg) }
     elsif arg.nil?
       my_each { |element| return false if element.nil? || element == false }
@@ -59,7 +66,7 @@ module Enumerable
   def my_any?(arg = nil)
     if block_given?
       my_each { |element| return true if yield(element) }
-    elsif !arg.nil? and arg.is_a?(Class)
+    elsif !arg.nil? && arg.is_a?(Class)
       my_each { |element| return true if [element.class, element.class.superclass].include?(arg) }
     elsif arg.nil?
       my_each { |element| return true if element }
