@@ -156,7 +156,32 @@ describe 'Enumerable' do
       expect(range.my_map { 'cat' }).to eq(range.map { 'cat' })
     end
   end
+
+  describe '#my_inject' do
+    it 'Sum some numbers' do
+    expect((5..10).my_inject(:+)).to eq((5..10).inject(:+))
+    end
+    
+    it 'Same using a block and inject' do
+      expect((5..10).my_inject { |sum, n| sum + n }).to eq((5..10).inject { |sum, n| sum + n })
+    end
+
+    it 'Multiply some numbers' do
+      expect((5..10).my_inject(1, :*)).to eq((5..10).inject(1, :*))
+    end
+
+    it 'Find the longest word' do
+      expect(%w[ cat sheep bear ].my_inject { |m, w| m.length > w.length ? m : w }).to eq(%w[ cat sheep bear ].inject { |m, w| m.length > w.length ? m : w })
+    end
+  end
 end
+
+describe 'multiply_els' do
+  it 'multiply numbers in array' do
+    expect(multiply_els([1,2,3])).to eq([1,2,3].inject(:*))
+  end
+end
+
 
 # rubocop:enable Metrics/BlockLength
 # rubocop:enable Style/EvenOdd
