@@ -1,8 +1,8 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# ENUMERABLES
+# Rspec for Enumerable Methods
 
-We created a our own enumerables methods in Ruby.
+We created tests for our own enumerables methods in Ruby.
 - my_each
 - my_each_with_index
 - my_select
@@ -12,6 +12,7 @@ We created a our own enumerables methods in Ruby.
 - my_count
 - my_map
 - my_inject
+- multiply_els
 
 
 ## Built With
@@ -20,11 +21,11 @@ We created a our own enumerables methods in Ruby.
 
 ## Live Demo
 
-[Check our code](https://repl.it/@jcy2704/UnripePutridService#main.rb)
+[Check our code](https://repl.it/@jcy2704/myenumerables#spec/enumerable_spec.rb)
 
 ## Getting Started
 
-**This project was created for the sole purpose of understanding the concept of enumerable methods and creating methods in ruby.**
+**We used the existing project of Enumerable methods to create and test Rspec.**
 
 
 To get a local copy up and running follow these simple example steps.
@@ -32,12 +33,13 @@ To get a local copy up and running follow these simple example steps.
 ### Prerequisites
 Computer running Mac OS, Windows, or Linux Ubuntu.
 Internet browser: Firefox, Google Chrome, Opera...
+Ruby and Rspec installed in your system
 
 ### Setup
 Download the code or copy the git repository to your computer.
 
 ### Usage
-To run our project type 'ruby enumerable.rb' in your terminal where your file is stored.
+To run our project type `rspec` in your terminal where your file is stored to be able to use the Rspec tests.
 
 
 ## Authors
@@ -50,15 +52,15 @@ To run our project type 'ruby enumerable.rb' in your terminal where your file is
 
 👤 **Thales Neves**
 
-- GitHub: [@thneves](https://github.com/thneves)
-- LinkedIn: [@thales-neves10](https://www.linkedin.com/in/thales-neves10/)
-- Twitter: [@tsneves11](https://twitter.com/tsneves11)
+- GitHub: [@abmasadullah](https://github.com/abmasadullah)
+- LinkedIn: [@abmasadullah](https://www.linkedin.com/in/abmasadullah/)
+- Twitter: [@abmasadullah](https://twitter.com/abmasadullah)
 
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/thneves/my_enumerables/issues).
+Feel free to check the [issues page](https://github.com/jcy2704/my_enumerables/issues).
 
 ## Show your support
 
