@@ -2,8 +2,7 @@
 # rubocop:disable Metrics/CyclomaticComplexity
 # rubocop:disable Metrics/PerceivedComplexity
 # rubocop:disable Style/RedundantSelf
-# rubocop:disable Metrics/MethodLength
-# rubocop:disable Metrics/AbcSize
+
 
 # module Enumerable
 module Enumerable
@@ -149,5 +148,3 @@ end
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
 # rubocop:enable Style/RedundantSelf
-# rubocop:enable Metrics/MethodLength
-# rubocop:enable Metrics/AbcSize

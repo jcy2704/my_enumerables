@@ -1,7 +1,7 @@
-# rubocop:disable Metrics/BlockLength
 # rubocop:disable Style/EvenOdd
+# rubocop:disable Layout/LineLength
 
-require '../enumarable.rb'
+require './enumarable.rb'
 
 describe 'Enumerable' do
   arr = [1, 2, 3, 4]
@@ -21,11 +21,11 @@ describe 'Enumerable' do
     end
 
     it 'iterates in a hash' do
-      expect(hash.my_each { |n| puts n }).to eq(hash.each { |n| puts n})
+      expect(hash.my_each { |n| puts n }).to eq(hash.each { |n| puts n })
     end
 
     it 'iterates in a range' do
-      expect(range.my_each { |n| puts n }).to eq(range.each { |n| puts n})
+      expect(range.my_each { |n| puts n }).to eq(range.each { |n| puts n })
     end
   end
 
@@ -132,7 +132,7 @@ describe 'Enumerable' do
     end
 
     it 'return false if one true' do
-      expect([false,nil,true].my_none?).to eq([false,nil,true].none?)
+      expect([false, nil, true].my_none?).to eq([false, nil, true].none?)
     end
   end
 
@@ -146,7 +146,7 @@ describe 'Enumerable' do
     end
 
     it 'count by block given' do
-      expect(arr.my_count { |x| x%2 == 0 }).to eq(arr.count { |x| x%2 == 0 })
+      expect(arr.my_count { |x| x % 2 == 0 }).to eq(arr.count { |x| x % 2 == 0 })
     end
   end
 
@@ -159,9 +159,9 @@ describe 'Enumerable' do
 
   describe '#my_inject' do
     it 'Sum some numbers' do
-    expect((5..10).my_inject(:+)).to eq((5..10).inject(:+))
+      expect((5..10).my_inject(:+)).to eq((5..10).inject(:+))
     end
-    
+
     it 'Same using a block and inject' do
       expect((5..10).my_inject { |sum, n| sum + n }).to eq((5..10).inject { |sum, n| sum + n })
     end
@@ -171,17 +171,16 @@ describe 'Enumerable' do
     end
 
     it 'Find the longest word' do
-      expect(%w[ cat sheep bear ].my_inject { |m, w| m.length > w.length ? m : w }).to eq(%w[ cat sheep bear ].inject { |m, w| m.length > w.length ? m : w })
+      expect(%w[cat sheep bear].my_inject { |m, w| m.length > w.length ? m : w }).to eq(%w[cat sheep bear].inject { |m, w| m.length > w.length ? m : w })
     end
   end
 end
 
 describe 'multiply_els' do
   it 'multiply numbers in array' do
-    expect(multiply_els([1,2,3])).to eq([1,2,3].inject(:*))
+    expect(multiply_els([1, 2, 3])).to eq([1, 2, 3].inject(:*))
   end
 end
 
-
-# rubocop:enable Metrics/BlockLength
+# rubocop:enable Layout/LineLength
 # rubocop:enable Style/EvenOdd
