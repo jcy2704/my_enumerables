@@ -4,10 +4,10 @@
 require './enumarable.rb'
 
 describe 'Enumerable' do
-  arr = [1, 2, 3, 4]
-  str = %w[ant bear cat]
-  hash = { 'a' => 1, 'b' => 2, 'c' => 3 }
-  range = (1..4)
+  let(:arr) { [1, 2, 3, 4] }
+  let(:str) { %w[ant bear cat] }
+  let(:hash) { { 'a' => 1, 'b' => 2, 'c' => 3 } }
+  let(:range) { (1..4) }
 
   describe '#my_each' do
     it 'return enum if no block given' do
