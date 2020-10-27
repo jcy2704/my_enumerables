@@ -3,7 +3,6 @@
 # rubocop:disable Metrics/PerceivedComplexity
 # rubocop:disable Style/RedundantSelf
 
-
 # module Enumerable
 module Enumerable
   def my_each
